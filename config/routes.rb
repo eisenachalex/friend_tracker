@@ -3,6 +3,7 @@ FriendTracker::Application.routes.draw do
   post '/create' => "welcome#create"
   post '/login' => "welcome#login"
   post '/update' => "welcome#update"
+  get '/map' => "welcome#map"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

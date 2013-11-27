@@ -1,14 +1,14 @@
 class WelcomeController < ApplicationController
 	def index
-		p session
 		@user = User.new
 		@users = User.all
-		gon.users = User.all
-		gon.current_user = session[:user_id]
+
 	end
 
 	def create
+		p params
 		@user = User.create(params[:user])
+		session[:user_id] = @user.id
 	end
 
 	def update
@@ -25,9 +25,13 @@ class WelcomeController < ApplicationController
 		p @user
 		if @user && @user.authenticate(params[:user][:password])
 				session[:user_id] = @user.id
-				redirect_to '/'
 		else
-			p "stupid"
+			p "login_failed"
 		end
+	end
+
+	def map
+			gon.users = User.all
+		gon.current_user = session[:user_id]
 	end
 end

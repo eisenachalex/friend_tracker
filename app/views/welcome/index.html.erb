@@ -1,17 +1,16 @@
 
-<div id="googleMap" style="width:50%;height:50%;"></div>
+<div id="googleMap" style="width:70%;height:100%;display:none"></div>
+
+
+<div id="forms">
 
 <%= form_for @user, url: {action: "create"} do |f| %>
-<%= f.text_field :username %>
-<%= f.password_field :password %>
+<%= f.text_field :username %><br/>
+<%= f.password_field :password %><br/>
 <%= f.hidden_field :lat %>
 <%= f.hidden_field :long %>
 <%= f.submit %>
 <% end %>
-
-
-
-
 
 <%= form_for @user, url: {action: "login"} do |f| %>
 <%= f.text_field :username %>
@@ -21,4 +20,5 @@
 <%= f.submit "log in" %>
 <% end %>
 
-<%= session[:user_id] %>
+
+</div>
