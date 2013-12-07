@@ -66,7 +66,7 @@ function showPosition(position)
   }
 
   data = {latitude: geo_lat, longitude: geo_long, user_id: gon.current_user}
-
+  console.log(gon.current_user)
   getLocation();
   $.post('/update', data)
 

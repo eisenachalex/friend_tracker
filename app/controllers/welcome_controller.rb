@@ -31,6 +31,7 @@ class WelcomeController < ApplicationController
 	end
 
 	def map
+		p session[:user_id]
 			gon.users = User.all
 		gon.current_user = session[:user_id]
 	end
