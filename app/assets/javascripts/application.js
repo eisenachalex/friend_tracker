@@ -73,6 +73,11 @@ function showPosition(position)
 },5000)
 
 $(document).ready(function() {
+  $.ajaxSetup({
+  headers: {
+    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+  }
+});
   $(document).on("submit", "form", function(e) {
     e.preventDefault();
     console.log(geo_lat,geo_long)
