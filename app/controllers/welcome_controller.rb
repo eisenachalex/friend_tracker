@@ -13,8 +13,7 @@ class WelcomeController < ApplicationController
 
 	def retrieve_coordinates
 		@user = User.find(params[:user_id])
-		render :json => { :success => true, 
-  :user => @user.to_json() }
+		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username  }
 	end
 
 
