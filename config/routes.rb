@@ -4,6 +4,7 @@ FriendTracker::Application.routes.draw do
   post '/login' => "welcome#login"
   get '/update' => "welcome#update"
   get '/map' => "welcome#map"
+  get '/retrieve_coordinates' => "welcome#retrieve_coordinates"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

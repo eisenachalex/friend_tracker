@@ -11,6 +11,12 @@ class WelcomeController < ApplicationController
 		session[:user_id] = @user.id
 	end
 
+	def retrieve_coordinates
+		@user = User.find(params[:user_id])
+		render :json => { :success => true, 
+  :user => @user.to_json(:only => [:lat]) }
+	end
+
 
 	def update
 		@user = User.find(params[:user_id])
