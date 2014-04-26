@@ -50,27 +50,6 @@ map.fitBounds(bounds);
 }
 
 
-setInterval(function() {
-  function getLocation()
-  {
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(showPosition);
-    }
-  else{console.log("wow")}
-  }
-function showPosition(position)
-  {
-  geo_lat =  position.coords.latitude;
-  geo_long = position.coords.longitude; 
-  }
-
-  data = {latitude: geo_lat, longitude: geo_long, user_id: gon.current_user}
-  console.log(gon.current_user)
-  getLocation();
-  $.post('/update', data)
-
-},5000)
 
 $(document).ready(function() {
   $.ajaxSetup({
