@@ -13,12 +13,12 @@ class WelcomeController < ApplicationController
 
 
 	def update
-		p params
-		p session
-	#	@user = User.find(params[:user_id])
-		@lat = params[:latitude]
-		@long = params[:longitude]
-	#	@user.save!
+		@user = User.find(params[:user_id])
+		@user.lat = params[:latitude]
+		@user.long = params[:longitude]
+		@user.save!
+		p "HEREEE"
+		p @user
 	end
 
 	def login
