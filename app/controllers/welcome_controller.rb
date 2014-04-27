@@ -11,6 +11,15 @@ class WelcomeController < ApplicationController
 		session[:user_id] = @user.id
 	end
 
+	def friends
+		@users = User.all
+		@usernames = Array.new
+		@users.each do |user|
+			@usernames << user.username
+		end
+		
+		render :json => { :users => @usernames}
+	end
 	def retrieve_coordinates
 		@user = User.find(params[:user_id])
 		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username  }
