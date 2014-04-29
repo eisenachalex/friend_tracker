@@ -4,6 +4,7 @@ class CreateUsersTable < ActiveRecord::Migration
 			t.string :username
 			t.string :lat
 			t.string :long
+			t.boolean :is_active, default: false
 			t.string :password_digest
 			t.timestamps
 		end

@@ -11,6 +11,16 @@ class WelcomeController < ApplicationController
 		session[:user_id] = @user.id
 	end
 
+	def is_active
+		@user = User.where(username: params[:username]).first
+		if params[:active] == "yes"
+			@user.is_active = true
+		else
+			@user.is_active = false
+		end
+		@user.save!
+	end
+
 	def friends
 		@users = User.all
 		@usernames = Array.new
@@ -19,6 +29,16 @@ class WelcomeController < ApplicationController
 		end
 		
 		render :json => { :users => @usernames}
+	end
+
+	def active_friends
+		@users = User.where(:is_active => false)
+		@usernames = Array.new
+		@users.each do |user|
+			@usernames << user.username
+		end
+		render :json => { :users => @usernames}
+		
 	end
 	def retrieve_coordinates
 		@user = User.where(username: params[:username]).first
