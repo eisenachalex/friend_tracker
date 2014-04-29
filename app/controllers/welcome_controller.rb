@@ -15,8 +15,10 @@ class WelcomeController < ApplicationController
 		@user = User.where(username: params[:username]).first
 		if params[:active] == "yes"
 			@user.is_active = true
+			p "jownts"
 		else
 			@user.is_active = false
+			p "no jownts"
 		end
 		@user.save!
 	end
