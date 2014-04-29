@@ -1,7 +1,4 @@
 class AddIsActive< ActiveRecord::Migration
-  class Product < ActiveRecord::Base
-  end
- 
   def change
     add_column :users, :is_active, :boolean, default: false
 
