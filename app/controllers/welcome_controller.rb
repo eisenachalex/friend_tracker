@@ -34,11 +34,13 @@ class WelcomeController < ApplicationController
 	end
 
 	def active_friends
-		@users = User.where(:is_active => false)
-		@usernames = Hash.new
+		@users = User.all
+		@usernames = Array.new
 		@users.each do |user|
-			userHash = {username: user.username, is_active: user.is_active}
-			@usernames.merge!(userHash)
+			if user.is_active == true
+				@usernames << user.username
+			end
+			
 		end
 		render :json => { :users => @usernames}
 		
