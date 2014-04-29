@@ -37,7 +37,8 @@ class WelcomeController < ApplicationController
 		@users = User.where(:is_active => false)
 		@usernames = Hash.new
 		@users.each do |user|
-			@usernames.merge!(user.username => user.is_active)
+			userHash = {user.username => user.is_active}
+			@usernames.merge!(userHash)
 		end
 		render :json => { :users => @usernames}
 		
