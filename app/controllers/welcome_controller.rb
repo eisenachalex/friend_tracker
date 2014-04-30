@@ -11,6 +11,11 @@ class WelcomeController < ApplicationController
 		session[:user_id] = @user.id
 	end
 
+	def current_user
+		@user = User.where(username: params[:username]).first
+		render :json => {user: @user.username, is_active: @user.is_active}
+	end
+
 	def is_active
 		@user = User.where(username: params[:username]).first
 		if params[:active] == "yes"

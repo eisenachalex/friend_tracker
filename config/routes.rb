@@ -8,6 +8,7 @@ FriendTracker::Application.routes.draw do
   get '/retrieve_coordinates' => "welcome#retrieve_coordinates"
   get '/active_friends' => "welcome#active_friends"
   get '/is_active' => "welcome#is_active"
+  get '/current_user' => "welcome#current_user"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
