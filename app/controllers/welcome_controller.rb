@@ -59,7 +59,7 @@ class WelcomeController < ApplicationController
 		@sessions= Session.all
 		@user_sessions = Array.new
 		@sessions.each do |session|
-			@sender = User.where(username: session.sender)
+			@sender = User.where(username: session.sender).first
 			if (session.receiver == "alexEisenach") && (@sender.is_active == true)
 				@user_sessions << session.sender
 			end
