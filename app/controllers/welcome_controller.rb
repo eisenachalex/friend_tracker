@@ -70,8 +70,12 @@ class WelcomeController < ApplicationController
 	end
 	def retrieve_coordinates
 		@user = User.where(username: params[:username]).first
-		p @user
-		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username  }
+		@session = Session.where(sender: params[:username], receiver: params[:current_user]).first
+		if @session
+		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => true }
+		else
+		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username  }		
+		end
 	end
 
 
