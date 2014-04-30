@@ -72,9 +72,9 @@ class WelcomeController < ApplicationController
 		@user = User.where(username: params[:username]).first
 		@session = Session.where(sender: params[:username], receiver: params[:current_user]).first
 		if @session
-		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => true }
+		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => "live" }
 		else
-		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => false }		
+		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => "not_live"}		
 		end
 	end
 
