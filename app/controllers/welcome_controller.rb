@@ -74,7 +74,7 @@ class WelcomeController < ApplicationController
 		if @session
 		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => true }
 		else
-		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username  }		
+		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => false }		
 		end
 	end
 
