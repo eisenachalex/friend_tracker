@@ -9,6 +9,8 @@ FriendTracker::Application.routes.draw do
   get '/active_friends' => "welcome#active_friends"
   get '/is_active' => "welcome#is_active"
   get '/current_user' => "welcome#current_user"
+  get '/create_session' => "welcome#create_session"
+  get '/delete_session' => "welcome#delete_session"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

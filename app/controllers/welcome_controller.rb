@@ -5,6 +5,17 @@ class WelcomeController < ApplicationController
 
 	end
 
+
+	def create_session
+		@session = Session.create(sender: params[:sender], receiver: params[:receiver])
+		@session.save!
+
+	end
+
+	def delete_session
+		@session = Session.where(sender: params[:sender], receiver: params[:receiver]).first
+		@session.destroy
+	end
 	def create
 		p params
 		@user = User.create(params[:user])
@@ -39,15 +50,15 @@ class WelcomeController < ApplicationController
 	end
 
 	def active_friends
-		@users = User.all
-		@usernames = Array.new
-		@users.each do |user|
-			if user.is_active == true
-				@usernames << user.username
+		@sessions= Session.all
+		@user_sessions = Array.new
+		@sessions.each do |session|
+			if session.receiver == "alexEisenach"
+				@user_sessions << session.sender
 			end
 			
 		end
-		render :json => { :users => @usernames}
+		render :json => { :users => @user_sessions}
 		
 	end
 	def retrieve_coordinates
