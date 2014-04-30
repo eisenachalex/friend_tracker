@@ -13,8 +13,14 @@ class WelcomeController < ApplicationController
 	end
 
 	def delete_session
-		@session = Session.where(sender: params[:sender], receiver: params[:receiver]).first
-		@session.destroy
+		if params[:receiver]
+		@session = Session.where(sender: params[:sender], receiver: params[:receiver])
+		@session.destroy_all
+		else
+		@session = Session.where(sender: params[:sender])
+		p @session
+		@session.destroy_all
+		end
 	end
 	def create
 		p params
