@@ -80,7 +80,7 @@ class WelcomeController < ApplicationController
 
 
 	def update
-		@user = User.find(params[:user_id])
+		@user = User.where(username: params[:username]).first
 		@user.lat = params[:latitude]
 		@user.long = params[:longitude]
 		@user.save!
