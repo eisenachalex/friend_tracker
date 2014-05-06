@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 
 
 	def create_session
-		@existing_session = Session.where(sender:params[:sender], receiver: params[:receiver])
+		@existing_session = Session.where(sender:params[:sender], receiver: params[:receiver]).first
 		if @existing_session
 			p "session exists"
 		else
