@@ -9,7 +9,8 @@ class WelcomeController < ApplicationController
 	def create_session
 		@existing_session = Session.where(sender:params[:sender], receiver: params[:receiver]).first
 		if @existing_session
-			p "session exists"
+			p "OLD NEWS"
+			@existing_session.updated_at = DateTime.now
 		else
 		@session = Session.create(sender: params[:sender], receiver: params[:receiver])
 		@session.save!
@@ -63,8 +64,14 @@ class WelcomeController < ApplicationController
 		@sessions= Session.all
 		@user_sessions = Array.new
 		@sessions.each do |session|
+			p "uPDATED AT" 
+			p session.updated_at
 			@sender = User.where(username: session.sender).first
-			if (session.receiver == params[:current_user]) && (@sender.is_active == true)
+			timeLapse = (Time.now.utc - 6.days)
+			print "TIME LAPSE "
+			p timeLapse
+			if (session.receiver == params[:current_user]) && (@sender.is_active == false) && (session.updated_at > 5.minutes.ago)
+				p "lapse"
 				@user_sessions << session.sender
 			end
 			

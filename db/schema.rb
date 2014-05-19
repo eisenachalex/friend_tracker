@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20140430181921) do
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "lat"
+    t.string   "mobile"
     t.string   "long"
     t.boolean  "is_active",       :default => false
     t.string   "password_digest"
