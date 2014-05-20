@@ -1,6 +1,7 @@
 FriendTracker::Application.routes.draw do
   get '/' => 'welcome#index'
   post '/create' => "welcome#create"
+  post '/test' => "welcome#test"
   post '/login' => "welcome#login"
   get '/update' => "welcome#update"
   get '/map' => "welcome#map"
