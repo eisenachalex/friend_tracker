@@ -105,6 +105,7 @@ class WelcomeController < ApplicationController
 	end
 
 	def login
+		skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'application/json' }
 		p params
 		@user = User.find_by_username(params[:user][:username])
 		if @user && @user.authenticate(params[:user][:password])
