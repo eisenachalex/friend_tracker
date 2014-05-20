@@ -5,6 +5,10 @@ class WelcomeController < ApplicationController
 
 	end
 
+	def test
+		p params
+	end
+
 
 	def create_session
 		@existing_session = Session.where(sender:params[:sender], receiver: params[:receiver]).first
@@ -102,12 +106,13 @@ class WelcomeController < ApplicationController
 	def login
 		p params
 		@user = User.find_by_username(params[:user][:username])
-		p @user
 		if @user && @user.authenticate(params[:user][:password])
-				session[:user_id] = @user.id
+			session[:user_id] = @user.id
 		else
 			p "login_failed"
 		end
+
+		render :login
 	end
 
 	def map
