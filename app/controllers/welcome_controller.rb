@@ -112,7 +112,7 @@ class WelcomeController < ApplicationController
 			session[:user_id] = @user.id
 			render :json => { :login_status => "success"}
 		else
-			render :json => {:login_status => "failed"}
+			render :json => { :login_status => "failed"}
 		end
 
 	end
