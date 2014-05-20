@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
 
 	def test
 		p params
+		p "t-t-t-twelve twelve carats"
 	end
 
 
