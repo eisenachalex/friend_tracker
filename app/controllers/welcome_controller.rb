@@ -110,9 +110,9 @@ class WelcomeController < ApplicationController
 
 		if @user && @user.authenticate(params[:password])
 			session[:user_id] = @user.id
-			p "success"
+			render :json => { :login_status => "success"}
 		else
-			p "login_failed"
+			render :json => {:login_status => "failed"}
 		end
 
 	end
