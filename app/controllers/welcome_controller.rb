@@ -113,7 +113,6 @@ class WelcomeController < ApplicationController
 			p "login_failed"
 		end
 
-		render :login
 	end
 
 	def map
