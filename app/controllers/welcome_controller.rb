@@ -5,12 +5,6 @@ class WelcomeController < ApplicationController
 
 	end
 
-	def test
-		p params
-		p "t-t-t-twelve twelve carats"
-	end
-
-
 	def create_session
 		@existing_session = Session.where(sender:params[:sender], receiver: params[:receiver]).first
 		if @existing_session
