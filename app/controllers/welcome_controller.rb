@@ -83,10 +83,8 @@ class WelcomeController < ApplicationController
 			p "uPDATED AT" 
 			p session.updated_at
 			@sender = User.where(username: session.sender).first
-			timeLapse = (Time.now.utc - 6.days)
-			print "TIME LAPSE "
-			p timeLapse
-			if (session.receiver == params[:current_user]) && (@sender.is_active == false) && (session.updated_at > 5.minutes.ago)
+			last_updated = @sender.updated_at
+			if (session.receiver == params[:current_user]) && (@sender.is_active == true) && ((Time.now - last_updated) < 60)
 				p "lapse"
 				@user_sessions << session.sender
 			end
@@ -97,6 +95,11 @@ class WelcomeController < ApplicationController
 	end
 	def retrieve_coordinates
 		@user = User.where(username: params[:username]).first
+		last_updated = @user.updated_at
+		if (Time.now - last_updated) > 60
+		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => "not_connected" }
+		end
+
 		@session = Session.where(sender: params[:username], receiver: params[:current_user]).first
 		if @session
 		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => "live" }
@@ -122,7 +125,7 @@ class WelcomeController < ApplicationController
 		if @user && @user.authenticate(params[:password])
 			p "success"
 			session[:user_id] = @user.id
-			render :json => { :login_status => "success"}
+			render :json => { :login_status => "success" , :phone_number => @user.mobile}
 			p "json should be there"
 		else
 			p "failure"
