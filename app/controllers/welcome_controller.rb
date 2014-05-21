@@ -38,6 +38,23 @@ class WelcomeController < ApplicationController
 		session[:user_id] = @user.id
 	end
 
+	def create_new_user
+		p params
+		@user = User.where(username: params[:username]).first
+		if @user
+			render :json => {login_status: "user already exists"}
+		end
+		@user = User.where(mobile: params[:mobile]).first
+		if @user
+			render :json => {login_status: "mobile number already exists"}
+		end
+		@user = User.create(username: params[:username], mobile: params[:mobile], password: params[:password])
+		if @user
+			@user.save!
+			render :json => {login_status: "new user created"}
+		end
+	end
+
 	def current_user
 		@user = User.where(username: params[:username]).first
 		render :json => {user: @user.username, is_active: @user.is_active}
@@ -109,10 +126,14 @@ class WelcomeController < ApplicationController
 		@user = User.find_by_username(params[:username])
 
 		if @user && @user.authenticate(params[:password])
+			p "success"
 			session[:user_id] = @user.id
 			render :json => { :login_status => "success"}
+			p "json should be there"
 		else
+			p "failure"
 			render :json => { :login_status => "failed"}
+			p "json shoudl be there"
 		end
 
 	end
