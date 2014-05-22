@@ -113,6 +113,7 @@ class WelcomeController < ApplicationController
 		@user = User.where(username: params[:username]).first
 		@user.lat = params[:latitude]
 		@user.long = params[:longitude]
+		@user.update_attribute(:updated_at, Time.now);
 		@user.save!
 		p "HEREEE"
 		p @user
@@ -121,7 +122,7 @@ class WelcomeController < ApplicationController
 	def login
 		p params
 		@user = User.find_by_username(params[:username])
-
+		p @user.username
 		if @user && @user.authenticate(params[:password])
 			p "success"
 			session[:user_id] = @user.id
