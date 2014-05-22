@@ -84,7 +84,7 @@ class WelcomeController < ApplicationController
 			p session.updated_at
 			@sender = User.where(username: session.sender).first
 			last_updated = @sender.updated_at
-			if (session.receiver == params[:current_user]) && (@sender.is_active == true) && ((Time.now - last_updated) < 60)
+			if (session.receiver == params[:current_user]) && (@sender.is_active == true) && ((Time.now - last_updated) < 30)
 				p "lapse"
 				@user_sessions << session.sender
 			end
@@ -96,7 +96,8 @@ class WelcomeController < ApplicationController
 	def retrieve_coordinates
 		@user = User.where(username: params[:username]).first
 		last_updated = @user.updated_at
-		if (Time.now - last_updated) > 30
+		if (Time.now - last_updated) > 30)
+		p "TIME OUT"
 		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => "not_connected" }
 		end
 
