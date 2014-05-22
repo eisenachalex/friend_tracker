@@ -35,16 +35,14 @@ class WelcomeController < ApplicationController
 	def create_new_user
 		p params
 		@user = User.where(username: params[:username]).first
+		@mobile_user = User.where(mobile: params[:mobile]).first
 		if @user
 			render :json => {login_status: "user already exists"}
-		end
-		@user = User.where(mobile: params[:mobile]).first
-		if @user
+		elsif @mobile_user
 			render :json => {login_status: "mobile number already exists"}
-		end
-		@user = User.create(username: params[:username], mobile: params[:mobile], password: params[:password])
-		if @user
-			@user.save!
+		else
+			@new_user = User.create(username: params[:username], mobile: params[:mobile], password: params[:password])
+			@new_user.save!
 			render :json => {login_status: "new user created"}
 		end
 	end
