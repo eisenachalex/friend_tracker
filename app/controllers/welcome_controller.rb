@@ -99,7 +99,7 @@ class WelcomeController < ApplicationController
 		if ((Time.now - last_updated) > 30)
 		p "TIME OUT"
 		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => "not_connected" }
-		end
+		else
 
 		@session = Session.where(sender: params[:username], receiver: params[:current_user]).first
 		if @session
