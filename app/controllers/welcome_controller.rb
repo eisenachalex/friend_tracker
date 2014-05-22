@@ -96,7 +96,7 @@ class WelcomeController < ApplicationController
 	def retrieve_coordinates
 		@user = User.where(username: params[:username]).first
 		last_updated = @user.updated_at
-		if (Time.now - last_updated) > 30)
+		if ((Time.now - last_updated) > 30)
 		p "TIME OUT"
 		render :json => { :lat => @user.lat, :long => @user.long, :user => @user.username, :sessionLive => "not_connected" }
 		end
