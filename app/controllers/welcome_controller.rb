@@ -120,7 +120,6 @@ class WelcomeController < ApplicationController
 	def login
 		p params
 		@user = User.find_by_username(params[:username])
-		p @user.username
 		if @user && @user.authenticate(params[:password])
 			p "success"
 			session[:user_id] = @user.id
