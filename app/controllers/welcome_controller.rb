@@ -8,7 +8,6 @@ class WelcomeController < ApplicationController
 	def create_session
 		@existing_session = Session.where(sender:params[:sender], receiver: params[:receiver]).first
 		if @existing_session
-			p "OLD NEWS"
 			@existing_session.updated_at = DateTime.now
 		else
 		@session = Session.create(sender: params[:sender], receiver: params[:receiver])
@@ -74,6 +73,18 @@ class WelcomeController < ApplicationController
 		render :json => { :users => @usernames}
 	end
 
+	def allowed_friends
+		@user = User.where(username: params[:username]).first
+		@sessions = Session.where(sender: params[:username])
+		p @sessions
+		@session_receivers = Array.new
+		@sessions.each do |session|
+			@session_receivers << session.receiver
+		end
+		render :json => {:allowed => @session_receivers}
+	end
+
+
 	def active_friends
 		@sessions= Session.all
 		@user_sessions = Array.new
@@ -111,6 +122,7 @@ class WelcomeController < ApplicationController
 		@user = User.where(username: params[:username]).first
 		@user.lat = params[:latitude]
 		@user.long = params[:longitude]
+		@user.is_active = true;
 		@user.update_attribute(:updated_at, Time.now);
 		@user.save!
 		p "HEREEE"
